@@ -21,7 +21,7 @@ public class BackgroundScroll : MonoBehaviour
     void Update()
     {
         meshRenderer.material.mainTextureOffset += new Vector2(scrollSpeed * Time.deltaTime, 0); 
-        // Time.deltaTime : 1ÇÁ·¹ÀÓÀÌ ¸î ÃÊÀÎÁö ¾Ë¾Æ³»´Â ³ğ. 2ÇÁ·¹ÀÓÀÌ¶ó¸é 0.5, 4ÇÁ·¹ÀÓÀÌ¶ó¸é 0.25.
-        // fps°¡ ´Ş¶óÁ®µµ ÀÏÁ¤ÇÑ ¼ø¼­¸¦ À¯ÁöÇÏ°Ô ÇØÁÜ
+        // Time.deltaTime : 1í”„ë ˆì„ì´ ëª‡ ì´ˆì¸ì§€ ì•Œì•„ë‚´ëŠ” ë†ˆ. 2í”„ë ˆì„ì´ë¼ë©´ 0.5, 4í”„ë ˆì„ì´ë¼ë©´ 0.25.
+        // fpsê°€ ë‹¬ë¼ì ¸ë„ ì¼ì •í•œ ìˆœì„œë¥¼ ìœ ì§€í•˜ê²Œ í•´ì¤Œ
     }
 }
