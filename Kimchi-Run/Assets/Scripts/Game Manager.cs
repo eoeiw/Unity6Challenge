@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
 
     public float PlayStartTime;
 
+    [Header("Fade Target")]
+    public GameObject FadeTarget; // 에디터에서 연결할 대상
+    private bool fadeTriggered = false; // 페이드 트리거
+
+
     void Awake(){
         if(Instance == null){
             Instance = this;
@@ -67,7 +72,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(State == GameState.Playing){
-            scoreText.text = "Score: " + Mathf.FloorToInt(CalculateScore());
+            scoreText.text = "Score: " + Mathf.FloorToInt(CalculateScore()); // 스코어 표시
+
+            if (Mathf.FloorToInt(CalculateScore()) == 10 && !fadeTriggered ) //100을 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
+            {
+                fadeTriggered = true; // 중복 실행 방지
+                FadeTarget.SetActive(true); // 그냥 바로 나타나게 설정
+            }
         }
         else if(State == GameState.Dead){
             scoreText.text = "High Score: " + GetHighScore();
