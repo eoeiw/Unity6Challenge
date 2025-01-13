@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour
 
     public float PlayStartTime;
 
-    [Header("Fade Target")]
-    public GameObject FadeTarget; // 에디터에서 연결할 대상
-    private bool fadeTriggered = false; // 페이드 트리거
+    [Header("Change Sky")]
+    public GameObject Sunset; // 에디터에서 연결할 대상
+    public GameObject Night; // 에디터에서 연결할 대상
+    public GameObject nightBuildings; // 에디터에서 연결할 대상
+    public GameObject builngs2; // 에디터에서 연결할 대상
 
 
     void Awake(){
@@ -62,9 +64,9 @@ public class GameManager : MonoBehaviour
 
     public float CalculateGameSpeed(){ // 게임 속도를 계산하는 메소드
         if(State != GameState.Playing){
-            return 5f; // 게임 상태가 Playing이 아니면 5의 속도로 고정
+            return 4f; // 게임 상태가 Playing이 아니면 5의 속도로 고정
         }
-        float speed = 7f + (0.5f * Mathf.FloorToInt(CalculateScore() / 10f)); // speed 변수에 7 + (0.5 * (CalculateScore() / 10))을 저장 // 10초마다 0.5씩 증가
+        float speed = 5f + (0.5f * Mathf.FloorToInt(CalculateScore() / 10f)); // speed 변수에 7 + (0.5 * (CalculateScore() / 10))을 저장 // 10초마다 0.5씩 증가
         return Mathf.Min(speed, 30f); // Mathf.Min 메소드를 사용하여 speed 변수와 30을 비교하여 작은 값을 반환 // 최대 속도를 30으로 제한
     }
 
@@ -74,10 +76,14 @@ public class GameManager : MonoBehaviour
         if(State == GameState.Playing){
             scoreText.text = "Score: " + Mathf.FloorToInt(CalculateScore()); // 스코어 표시
 
-            if (Mathf.FloorToInt(CalculateScore()) == 10 && !fadeTriggered ) //100을 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
+            if (Mathf.FloorToInt(CalculateScore()) == 50) //100을 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
             {
-                fadeTriggered = true; // 중복 실행 방지
-                FadeTarget.SetActive(true); // 그냥 바로 나타나게 설정
+                Sunset.SetActive(true); // 그냥 바로 나타나게 설정
+            }
+            else if(Mathf.FloorToInt(CalculateScore()) == 100){
+                Night.SetActive(true); 
+                nightBuildings.SetActive(true);
+                builngs2.SetActive(false);
             }
         }
         else if(State == GameState.Dead){
