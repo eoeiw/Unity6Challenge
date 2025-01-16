@@ -17,11 +17,7 @@ public class Player : MonoBehaviour
 
     private bool isInvincible = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private int isCheat = 0;
 
     // Update is called once per frame
     void Update()
@@ -33,6 +29,10 @@ public class Player : MonoBehaviour
             PlayerAnimator.SetInteger("State", 1);
         }
 
+    }
+    public void ActivateInvincibility(){ /// 치트모드 함수
+        isInvincible = true;
+        isCheat = 1;
     }
 
     public void KillPlayer(){
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
 
     void StartInvincible(){
         isInvincible = true;
-        Invoke("StopInvincible", 5f); // Invoke 메소드를 사용하여 StopInvincible 메소드를 3초 뒤에 호출
+        Invoke("StopInvincible", 5f); // Invoke 메소드를 사용하여 StopInvincible 메소드를 5초 뒤에 호출
     }
 
     void StopInvincible(){
@@ -83,8 +83,14 @@ public class Player : MonoBehaviour
             Heal();
         }
         else if(collider.gameObject.tag == "Golden"){
+            if(isCheat == 0){
+                Destroy(collider.gameObject);
+                CancelInvoke("StopInvincible");
+                StartInvincible();
+            }
+            else{
             Destroy(collider.gameObject);
-            StartInvincible();
+            }
         }
     }
 }

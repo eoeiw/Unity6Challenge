@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
-        Invoke("Spawn", UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay)); // Invoke 메소드를 사용하여 Spawn 메소드를 랜덤하게 호출
+        Invoke("Spawn", 0); // Invoke 메소드를 사용하여 Spawn 메소드를 랜덤하게 호출
     }
 
     void OnDisable(){

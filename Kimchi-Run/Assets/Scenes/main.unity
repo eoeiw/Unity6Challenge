@@ -459,6 +459,7 @@ MonoBehaviour:
   DeadUI: {fileID: 1714787516}
   scoreText: {fileID: 475913823}
   PlayStartTime: 0
+  cheatCode: 11010000110100001201000012010000140100001301000014010000130100006200000061000000
   Sunset: {fileID: 599466586}
   Night: {fileID: 142141098}
   nightBuildings: {fileID: 480722913}
@@ -913,11 +914,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1250957202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -469, y: 229}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 198.48999, y: 105.76999}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &475913823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,7 +1004,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -199.54591, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
