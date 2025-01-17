@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.Rendering.Universal;
 
 
 public enum GameState{
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject EnemySpawner; // EnemySpawner 게임 오브젝트를 참조하기 위한 변수
     public GameObject FoodSpawner; // FoodSpawner 게임 오브젝트를 참조하기 위한 변수
     public GameObject GoldSpawner; // GoldSpawner 게임 오브젝트를 참조하기 위한 변수
+    public GameObject LampSpawner; // LampSpawner 게임 오브젝트를 참조하기 위한 변수
     public Player PlayerScript; // Player 스크립트를 참조하기 위한 변수
     public GameObject DeadUI; // DeadUI 게임 오브젝트를 참조하기 위한 변수
 
@@ -39,13 +41,21 @@ public class GameManager : MonoBehaviour
     private Queue<KeyCode> inputQueue = new Queue<KeyCode>(); // 입력을 저장하기 위한 큐
     int isCheat = 0;
 
+    [Header("Light")]
+    public Light2D globalLight2D; // GlobalLight2D 라이트를 참조하기 위한 변수
+    public GameObject playerLight;
 
 
     [Header("Change Sky")]
+    public GameObject buildings; // 에디터에서 연결할 대상
     public GameObject Sunset; // 에디터에서 연결할 대상
     public GameObject Night; // 에디터에서 연결할 대상
     public GameObject nightBuildings; // 에디터에서 연결할 대상
-    public GameObject builngs2; // 에디터에서 연결할 대상
+    public GameObject builngs1; // 에디터에서 연결할 대상
+    public GameObject Dawn;
+    public GameObject dawnBuildings;
+    public GameObject dawnBuildings2;
+
 
 
     void Awake(){
@@ -116,14 +126,26 @@ public class GameManager : MonoBehaviour
                 scoreText.text = "Mode : Cheat \nScore : " + Mathf.FloorToInt(CalculateScore()); // 스코어 표시
             }
 
-            if (Mathf.FloorToInt(CalculateScore()) == 100) //100을 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
+            if (Mathf.FloorToInt(CalculateScore()) == 10) //100을 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
             {
                 Sunset.SetActive(true); // 그냥 바로 나타나게 설정
             }
-            else if(Mathf.FloorToInt(CalculateScore()) == 200){ // Night는 200점부터.
+            else if(Mathf.FloorToInt(CalculateScore()) == 20){ // Night는 200점부터.
                 Night.SetActive(true);  
                 nightBuildings.SetActive(true);
-                builngs2.SetActive(false);
+                builngs1.SetActive(false);
+            }
+            else if(Mathf.FloorToInt(CalculateScore()) == 30){ // Dawn은 300점부터.
+                globalLight2D.intensity = 0.05f;
+                buildings.SetActive(false);
+                playerLight.SetActive(true);
+                Night.SetActive(false);  
+                nightBuildings.SetActive(false);
+                LampSpawner.SetActive(true);
+                Dawn.SetActive(true);
+                dawnBuildings.SetActive(true);
+                dawnBuildings2.SetActive(true);
+
             }
         }
         else if(State == GameState.Dead){
