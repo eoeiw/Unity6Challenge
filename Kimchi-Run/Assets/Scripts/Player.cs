@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Platform"){
+        if (collision.gameObject.tag == "Ground"){
             if (!isGrounded)
             {
                 PlayerAnimator.SetInteger("State", 2);

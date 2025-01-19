@@ -126,17 +126,17 @@ public class GameManager : MonoBehaviour
                 scoreText.text = "Mode : Cheat \nScore : " + Mathf.FloorToInt(CalculateScore()); // 스코어 표시
             }
 
-            if (Mathf.FloorToInt(CalculateScore()) == 10) //100을 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
+            if (Mathf.FloorToInt(CalculateScore()) == 50) //50 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
             {
                 Sunset.SetActive(true); // 그냥 바로 나타나게 설정
             }
-            else if(Mathf.FloorToInt(CalculateScore()) == 20){ // Night는 200점부터.
+            else if(Mathf.FloorToInt(CalculateScore()) == 100){ // Night는 100.
                 Night.SetActive(true);  
                 nightBuildings.SetActive(true);
                 builngs1.SetActive(false);
             }
-            else if(Mathf.FloorToInt(CalculateScore()) == 30){ // Dawn은 300점부터.
-                globalLight2D.intensity = 0.05f;
+            else if(Mathf.FloorToInt(CalculateScore()) == 150){ // Dawn은 150.
+                globalLight2D.intensity = 0.01f;
                 buildings.SetActive(false);
                 playerLight.SetActive(true);
                 Night.SetActive(false);  

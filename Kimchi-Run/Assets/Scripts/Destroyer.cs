@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
+    public float objectVariable = -15f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,7 +12,7 @@ public class Destroyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x < -15)
+        if(transform.position.x < objectVariable)
         {
             Destroy(gameObject);
         }
