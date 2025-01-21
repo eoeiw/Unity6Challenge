@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("Reference")]
     public GameObject IntroUI; // IntroUI 게임 오브젝트를 참조하기 위한 변수
     public GameObject EnemySpawner; // EnemySpawner 게임 오브젝트를 참조하기 위한 변수
+    public GameObject CrowSpawner; // Player 게임 오브젝트를 참조하기 위한 변수
     public GameObject FoodSpawner; // FoodSpawner 게임 오브젝트를 참조하기 위한 변수
     public GameObject GoldSpawner; // GoldSpawner 게임 오브젝트를 참조하기 위한 변수
     public GameObject LampSpawner; // LampSpawner 게임 오브젝트를 참조하기 위한 변수
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
             if (Mathf.FloorToInt(CalculateScore()) == 50) //50 초과하는 시점은 매우 짧을 수 있음. 오류 발생시 ==으로 바꿔볼 것
             {
                 Sunset.SetActive(true); // 그냥 바로 나타나게 설정
+                CrowSpawner.SetActive(true);
             }
             else if(Mathf.FloorToInt(CalculateScore()) == 100){ // Night는 100.
                 Night.SetActive(true);  
