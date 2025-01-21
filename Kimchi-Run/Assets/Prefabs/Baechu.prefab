@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8951592724237310671}
   - component: {fileID: 3665545369085999853}
   - component: {fileID: 1150123858198677533}
-  - component: {fileID: 7506262410080658334}
+  - component: {fileID: 2033280195037364624}
   m_Layer: 0
   m_Name: Baechu
   m_TagString: Food
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0e30d411e65414da29b869026b24fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectVariable: -15
 --- !u!212 &1150123858198677533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7506262410080658334
+--- !u!61 &2033280195037364624
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,15 +150,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0016915947, y: 0.0008457899}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4857143, y: 0.51428574}
+    oldSize: {x: 0.56666666, y: 0.6}
     newSize: {x: 0.4857143, y: 0.51428574}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.4857143, y: 0.51428574}
+  m_Size: {x: 0.5971155, y: 0.6321404}
   m_EdgeRadius: 0

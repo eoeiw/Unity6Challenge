@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         if(State != GameState.Playing){
             return 4f; // 게임 상태가 Playing이 아니면 5의 속도로 고정
         }
-        float speed = 5f + (0.5f * Mathf.FloorToInt(CalculateScore() / 10f)); // speed 변수에 7 + (0.5 * (CalculateScore() / 10))을 저장 // 10초마다 0.5씩 증가
+        float speed = 5f + (0.1f * Mathf.FloorToInt(CalculateScore() / 5f)); // speed 변수에 7 + (0.5 * (CalculateScore() / 10))을 저장 // 10초마다 0.1씩 증가
         return Mathf.Min(speed, 30f); // Mathf.Min 메소드를 사용하여 speed 변수와 30을 비교하여 작은 값을 반환 // 최대 속도를 30으로 제한
     }
 
