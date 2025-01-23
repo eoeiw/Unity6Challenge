@@ -57,7 +57,10 @@ public class GameManager : MonoBehaviour
     public GameObject dawnBuildings;
     public GameObject dawnBuildings2;
 
-
+    [Header("Audio")]
+    public GameObject AudioBGM;
+    public GameObject gameOverSound;
+    private AudioSource audioSource;
 
     void Awake(){
         if(Instance == null){
@@ -67,9 +70,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         IntroUI.SetActive(true); // IntroUI 게임 오브젝트를 활성화
+        audioSource = AudioBGM.GetComponent<AudioSource>(); // AudioSource 컴포넌트를 참조하여 audioSource 변수에 저장
     }
 
-    float CalculateScore(){
+    public float CalculateScore(){
         return Time.time - PlayStartTime;
     }
 
@@ -82,17 +86,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void SaveCurrentScore(){
+        int score = Mathf.FloorToInt(CalculateScore());
+        PlayerPrefs.SetInt("CurrentScore", score); // PlayerPrefs 클래스의 SetFloat 메소드를 사용하여 CurrentScore 키에 score 변수를 저장
+        PlayerPrefs.Save(); // PlayerPrefs 클래스의 Save 메소드를 사용하여 저장
+    }
+
     int GetHighScore(){
         return PlayerPrefs.GetInt("HighScore", 0); // PlayerPrefs 클래스의 GetFloat 메소드를 사용하여 HighScore 키에 저장된 값을 반환
+    }
+
+    int GetCurrentScore(){
+        return PlayerPrefs.GetInt("CurrentScore", 0); // PlayerPrefs 클래스의 GetFloat 메소드를 사용하여 CurrentScore 키에 저장된 값을 반환
     }
 
     public float CalculateGameSpeed(){ // 게임 속도를 계산하는 메소드
         if(State != GameState.Playing){
             return 4f; // 게임 상태가 Playing이 아니면 5의 속도로 고정
         }
-        float speed = 5f + (0.1f * Mathf.FloorToInt(CalculateScore() / 5f)); // speed 변수에 7 + (0.5 * (CalculateScore() / 10))을 저장 // 10초마다 0.1씩 증가
+        float speed = 5f + (0.3f * Mathf.FloorToInt(CalculateScore() / 10f)); // speed 변수에 5 + (0.1 * (CalculateScore() / 5))을 저장 // 10초마다 0.2씩 증가
         return Mathf.Min(speed, 30f); // Mathf.Min 메소드를 사용하여 speed 변수와 30을 비교하여 작은 값을 반환 // 최대 속도를 30으로 제한
     }
+
 
     // Update is called once per frame
     void Update()
@@ -149,10 +164,12 @@ public class GameManager : MonoBehaviour
                 dawnBuildings2.SetActive(true);
 
             }
+
         }
         else if(State == GameState.Dead){
-            scoreText.text = "High Score: " + GetHighScore();
+            scoreText.text = "High Score: " + GetHighScore() + "\nCurrent Score : " + GetCurrentScore();
         }
+
         
         if(State == GameState.Playing && Lives <= 0){
             PlayerScript.KillPlayer();
@@ -162,6 +179,9 @@ public class GameManager : MonoBehaviour
             DeadUI.SetActive(true);
             State = GameState.Dead;
             SaveHighScore(); // 하이 스코어 저장 추가
+            SaveCurrentScore(); // 현재 스코어 저장 추가
+            AudioBGM.SetActive(false);
+            gameOverSound.SetActive(true);
         }
         if(State == GameState.Dead && Input.GetKeyDown(KeyCode.Space)){
             SceneManager.LoadScene("main"); // main 씬을 로드
